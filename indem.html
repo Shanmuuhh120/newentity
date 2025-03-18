@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon Organizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1; /* Pastel pink background */
+        }
+        header {
+            background-color: #f7cac9; /* Soft pink */
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+        nav {
+            background-color: #f9c2c3; /* Lighter pastel pink */
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #f7cac9; /* Soft pink hover effect */
+        }
+        section {
+            padding: 30px 15px;
+        }
+        .entity {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            padding: 20px;
+            transition: transform 0.3s ease-in-out;
+            display: none; /* Initially hide all entities */
+        }
+        .entity.active {
+            display: block; /* Show active entity */
+        }
+        .entity h2 {
+            margin-top: 0;
+            color: #f7cac9; /* Soft pink for headings */
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .entity p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: justify;
+            color: #555;
+        }
+        footer {
+            background-color: #f7cac9; /* Soft pink */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        /* Special Styling for the Links */
+        nav a.active {
+            border-bottom: 3px solid #fff;
+            padding-bottom: 12px;
+        }
+        .entity .highlight {
+            color: #f9c2c3; /* Highlight in lighter pastel pink */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Salon Organizer App</h1>
+    </header>
+    <nav>
+        <a href="javascript:void(0)" onclick="showEntity('appointment')" class="active">Appointment</a>
+        <a href="javascript:void(0)" onclick="showEntity('customer')">Customer</a>
+        <a href="javascript:void(0)" onclick="showEntity('reward')">Reward</a>
+    </nav>
+    <section>
+        <div id="appointment" class="entity active">
+            <h2>Appointment</h2>
+            <p><span class="highlight">Purpose:</span> Represents an appointment for a customer at the salon.</p>
+            <p><span class="highlight">Attributes:</span> 
+                <br><b>ID:</b> Unique identifier for the appointment.
+                <br><b>Service Name:</b> Name of the service the customer is booking.
+                <br><b>Appointment Time:</b> Date and time of the scheduled appointment.
+                <br><b>Status:</b> Current status (Pending, Confirmed, Completed, Cancelled).
+                <br><b>Customer:</b> Many-to-one relationship with Customer.
+            </p>
+        </div>
+        
+        <div id="customer" class="entity">
+            <h2>Customer</h2>
+            <p><span class="highlight">Purpose:</span> Represents a customer who books salon services.</p>
+            <p><span class="highlight">Attributes:</span> 
+                <br><b>ID:</b> Unique identifier for the customer.
+                <br><b>Username:</b> The customer's username (for login).
+                <br><b>Email:</b> The customer's email address.
+                <br><b>Password:</b> Stored securely.
+                <br><b>Appointments:</b> One-to-many relationship with Appointment.
+                <br><b>Reward:</b> One-to-one relationship with Reward.
+            </p>
+        </div>
+
+        <div id="reward" class="entity">
+            <h2>Reward</h2>
+            <p><span class="highlight">Purpose:</span> Represents the rewards system for customers.</p>
+            <p><span class="highlight">Attributes:</span> 
+                <br><b>ID:</b> Unique identifier for the reward.
+                <br><b>Points:</b> Number of reward points earned.
+                <br><b>Customer:</b> One-to-one relationship with Customer.
+                <br><b>Name:</b> Name of the reward (e.g., "VIP Reward", "Bronze Membership").
+            </p>
+        </div>
+    </section>
+    <footer>
+        &copy; 2025 Salon Organizer App. All rights reserved.
+    </footer>
+
+    <script>
+        function showEntity(entity) {
+            const entities = document.querySelectorAll('.entity');
+            entities.forEach(item => item.classList.remove('active'));
+
+            const activeEntity = document.getElementById(entity);
+            activeEntity.classList.add('active');
+
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
